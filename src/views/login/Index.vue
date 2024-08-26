@@ -1,3 +1,180 @@
+<script setup lang="ts">
+import { type LineChartProps, useLineStyleColor, getAlphaColor, BarChartProps, PieChartProps } from '@idux/charts'
+import { ref } from 'vue'
+import { SelectData } from '@idux/components/select'
+
+const lineOption: LineChartProps = {
+  // smooth: true,
+  title: { text: '折线图标题' },
+  xAxis: {
+    data: ['星期一', '星期二', '星期三', '星期四', '星期五'],
+  },
+  yAxis: {
+    name: '次',
+  },
+  series: [
+    {
+      data: [100, 150, 300, 88, 200],
+      name: '到店靓仔',
+      showSymbol: false,
+      lineStyle: {
+        shadowColor: getAlphaColor('#458FFF', 0.9), // 等同 rgba(69, 143, 255, 0.9)
+        shadowBlur: 8,
+        color: useLineStyleColor('#458FFF'),
+      },
+    },
+    {
+      data: [55, 88, 150, 120, 65],
+      name: '到店靓女',
+      showSymbol: false,
+      lineStyle: {
+        shadowColor: getAlphaColor('#20cc94', 0.9), // 等同 rgba(69, 143, 255, 0.9)
+        shadowBlur: 8,
+        color: useLineStyleColor('#20cc94')
+      }
+    },
+  ],
+}
+
+const barOption: BarChartProps = {
+  title: { text: '柱状图标题' },
+  xAxis: {
+    data: ['星期一', '星期二', '星期三', '星期四', '星期五'],
+  },
+  yAxis: {
+    name: '次',
+  },
+  series: [
+    {
+      data: [100, 150, 300, 88, 200],
+      name: '到店靓仔',
+    },
+    {
+      data: [55, 88, 150, 120, 65],
+      name: '到店靓女',
+    },
+  ],
+}
+
+const xDataSource: SelectData[] = [
+  { key: 'line1', label: '时间' },
+]
+
+const yDataSource: SelectData[] = [
+  { key: 'line1', label: '网店交易额' },
+  { key: 'pie1', label: '退款金额' },
+  { key: 'bar1', label: '环比增长' },
+]
+
+const typeDataSource: SelectData[] = [
+  { key: 'line1', label: '店铺' },
+]
+
+const selectDataSource: RadioData[] = [
+  { key: 'line', label: '折线图' },
+  { key: 'pie', label: '饼图' },
+  { key: 'bar', label: '柱状图' },
+]
+
+const data = [
+  { value: 145, name: '图例A' },
+  { value: 124, name: '图例B' },
+  { value: 118, name: '图例C' },
+  { value: 110, name: '图例D' },
+  { value: 104, name: '图例E' },
+  { value: 92, name: '图例F' },
+]
+
+const pieOption: PieChartProps = {
+  name: '基础饼图',
+  radius: '80%',
+  title: {
+    top: '8%',
+    left: '80%',
+  },
+  legend: {
+    top: '30%',
+    left: '80%',
+  },
+}
+
+const value = ref('line')
+
+const valueX = ref('line1')
+const valueY = ref('line1')
+const valueType = ref('line1')
+
+import { useFormControl, useFormGroup } from '@idux/cdk/forms'
+import { RadioData } from '@idux/components/radio'
+
+const controlLength = 12
+const formGroup = useFormGroup<Record<string, unknown>>({})
+
+for (let index = 1; index <= controlLength; index++) {
+  const control = useFormControl()
+  formGroup.addControl(`field${index}`, control)
+}
+
+</script>
 <template>
-  <span>登录</span>
+  <div class="page-content">
+    <IxRow gutter="24">
+      <IxCol span="4">
+        <IxFormItem label="X轴">
+          <IxSelect v-model:value="valueX" :dataSource="xDataSource" style="width: 100%"></IxSelect>
+        </IxFormItem>
+      </IxCol>
+      <IxCol span="4">
+        <IxFormItem label="X轴单位">
+          <IxInput></IxInput>
+        </IxFormItem>
+      </IxCol>
+      <IxCol span="4">
+        <IxFormItem label="Y轴">
+          <IxSelect v-model:value="valueY" :dataSource="yDataSource" style="width: 100%"></IxSelect>
+        </IxFormItem>
+      </IxCol>
+      <IxCol span="4">
+        <IxFormItem label="Y轴单位">
+          <IxInput></IxInput>
+        </IxFormItem>
+      </IxCol>
+      <IxCol span="4">
+        <IxFormItem label="类型">
+          <IxSelect v-model:value="valueType" :dataSource="typeDataSource" style="width: 100%"></IxSelect>
+        </IxFormItem>
+      </IxCol>
+    </IxRow>
+    <IxRow gutter="24">
+      <IxCol span="4">
+        <IxFormItem label="标题">
+          <IxInput></IxInput>
+        </IxFormItem>
+      </IxCol>
+    </IxRow>
+    <IxRow gutter="24">
+      <IxCol span="6">
+        <IxFormItem label="图表类型" class="chart-type">
+          <IxRadioGroup v-model:value="value" :dataSource="selectDataSource"></IxRadioGroup>
+        </IxFormItem>
+      </IxCol>
+    </IxRow>
+  </div>
+  <IxLineChart v-show="value === 'line'" style="height: calc(100% - 160px)" v-bind="lineOption" />
+  <IxBarChart v-show="value === 'bar'" style="height: calc(100% - 160px)" v-bind="barOption" />
+  <IxPieChart v-show="value === 'pie'" style="height: calc(100% - 160px); margin: 0 auto;" :data="data"
+    v-bind="pieOption" />
 </template>
+<style lang="less" scoped>
+.page-content {
+  :deep(.ix-form-item-label label) {
+    vertical-align: -6px;
+  }
+
+  .chart-type {
+    :deep(label) {
+      vertical-align: 0;
+    }
+  }
+}
+</style>

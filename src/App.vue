@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { IduxProvider } from './components/idux-provider'
-import { RouterView } from 'vue-router'
+import IduxLayout from './layout/IduxLayout.vue';
 </script>
 
 <template>
   <IduxProvider>
-    <router-view />
+    <IduxLayout />
   </IduxProvider>
 </template>

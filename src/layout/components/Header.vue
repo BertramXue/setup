@@ -21,26 +21,42 @@ const breadcrumbList = computed(() => {
 })
 </script>
 <template>
-  <IxBreadcrumb>
-    <!-- TODO: MenuData type problem -->
-    <IxBreadcrumbItem v-for="menuItem in breadcrumbList" :key="menuItem.key">
-      <IxDropdown v-if="menuItem.children">
-        <router-link :to="menuItem.key" class="ix-dropdown-trigger">
-          <span>
-            {{ menuItem.label }}
-          </span>
-        </router-link>
+  <div class="main-content__header">
+    <IxBreadcrumb>
+      <IxBreadcrumbItem v-for="menuItem in breadcrumbList" :key="menuItem.key">
+        <IxDropdown v-if="menuItem.children">
+          <router-link :to="menuItem.key" class="ix-dropdown-trigger">
+            <span>
+              {{ menuItem.label }}
+            </span>
+          </router-link>
 
-        <template #overlay>
-          <IxMenu :dataSource="menuItem.children" />
-        </template>
-      </IxDropdown>
+          <template #overlay>
+            <IxMenu :dataSource="menuItem.children" />
+          </template>
+        </IxDropdown>
 
-      <router-link :to="menuItem.key" v-else>
-        <span>
+        <div v-else>
           {{ menuItem.label }}
-        </span>
-      </router-link>
-    </IxBreadcrumbItem>
-  </IxBreadcrumb>
+        </div>
+      </IxBreadcrumbItem>
+    </IxBreadcrumb>
+  </div>
 </template>
+
+<style lang="less" scoped>
+.main-content__header {
+  height: 48px;
+  background-color: #fff;
+  box-shadow: inset 0px -1px 0px 0px #e1e5eb;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  line-height: 20px;
+  padding: 14px 24px;
+
+  .main-content__back-icon {
+    cursor: pointer;
+  }
+}
+</style>

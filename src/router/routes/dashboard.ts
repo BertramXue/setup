@@ -1,4 +1,3 @@
-import { IduxLayout } from '@/layout'
 import type { RouteRecordRaw } from 'vue-router'
 
 const routeName = 'dashboard'
@@ -8,11 +7,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: routeName,
     meta: {
-      title: 'Dashboard',
-      sort: 1,
+      title: '数据分析',
+      sort: 2,
       icon: 'dashboard',
     },
-    component: IduxLayout,
+    component: () => import('@/views/login/index.vue'),
     // children: [],
   },
 ]

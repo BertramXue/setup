@@ -1,16 +1,8 @@
 // idux.ts
 import type { App } from 'vue'
 
-// 导入 cdk 样式，注意是 `index`, 因为 cdk 不会区分主题
-import '@idux/cdk/index.css'
-
-// 如果不需要 reset 全局样式和滚动条样式，移除下面 2 行代码
-import '@idux/components/style/core/reset.default.css'
-import '@idux/components/style/core/reset-scroll.default.css'
-
-// 如果需要 css 按需加载，移除下面 2 行代码
-import '@idux/components/default.css'
-import '@idux/pro/default.css'
+import "@idux/components/index.full.css";
+import "@idux/pro/index.css";
 
 // 如果需要 js 按需加载，移除下面 3 行代码
 import IduxCdk from '@idux/cdk'

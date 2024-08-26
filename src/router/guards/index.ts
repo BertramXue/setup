@@ -13,10 +13,6 @@ export const createRouterGuards = (router: Router): void => {
     }
   })
 
-  router.afterEach(guard => {
-    document.title = guard?.meta?.title || document.title
-  })
-
   router.onError((error, to, from) => {
     console.error(error, from, to)
   })

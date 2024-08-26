@@ -1,21 +1,15 @@
 <template>
-  <IxProLayout :activeKey="activeKey" :menus="menus" type="mixin" :compress="true">
+  <IxProLayout :activeKey="activeKey" :menus="menus" type="sider" theme="dark" :logo="logo" fixed class="pro-layout">
     <template #itemLabel="item">
       <router-link :to="item.key">{{ item.label }}</router-link>
     </template>
-    <template #headerContent>
-      <Header />
-    </template>
-    <template #headerExtra>
-      <HeaderExtra />
-    </template>
-    <template #logo>
-      <Logo />
-    </template>
     <template #siderFooter>
-      <IxProLayoutSiderTrigger />
+      <IxLayoutSiderTrigger />
     </template>
-    <Main />
+    <div class="content">
+      <Header />
+      <Main />
+    </div>
   </IxProLayout>
 </template>
 
@@ -23,18 +17,22 @@
 import { computed, onMounted, ref } from 'vue'
 
 import type { MenuData } from '@idux/components/menu'
-import Logo from '@/layout/components/Logo.vue'
+import Logo from '@/assets/logo.svg'
+import Header from '@/layout/components/Header.vue'
 import Main from '@/layout/components/Main.vue'
 import { RouteRecordRaw, useRoute } from 'vue-router'
 import { cloneDeep } from 'lodash-es'
 import routes from '@/router/routes'
-import Header from './components/Header.vue'
-import HeaderExtra from './components/HeaderExtra.vue'
 import { normalizePath } from '@/utils'
 
 const menus = ref<MenuData[]>([])
 const activeKey = computed(() => route.path)
 const route = useRoute()
+
+const logo = {
+  image: Logo,
+  title: 'Pro Layout',
+};
 
 onMounted(() => {
   menus.value = walkMenus(routes, '/')
@@ -78,3 +76,18 @@ function walkMenus(routes: RouteRecordRaw | RouteRecordRaw[], parentPath: string
   return dataSource
 }
 </script>
+
+<style lang="less" scoped>
+.pro-layout {
+  .content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  :deep(.ix-pro-layout-content) {
+    padding: 0 !important;
+  }
+}
+</style>
+
