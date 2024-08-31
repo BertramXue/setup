@@ -4,10 +4,10 @@ const routeName = 'manage'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/manage',
+    path: '/',
     name: routeName,
     meta: {
-      title: '选品管理',
+      title: '产品管理',
       sort: 1,
       icon: 'exception',
     },
