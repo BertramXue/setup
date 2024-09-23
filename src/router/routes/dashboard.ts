@@ -8,7 +8,6 @@ const routes: Array<RouteRecordRaw> = [
     name: routeName,
     meta: {
       title: '数据图表',
-      sort: 2,
       icon: 'line-chart',
     },
     component: () => import('@/views/login/index.vue'),
@@ -19,7 +18,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'analysis',
     meta: {
       title: '数据分析',
-      sort: 2,
       icon: 'dashboard',
     },
     component: () => import('@/views/about/index.vue'),

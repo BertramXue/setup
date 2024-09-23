@@ -168,7 +168,8 @@ const handleTagDataChange = (data: TagSelectData) => {
   <div class="page-content">
     <IxRow gutter="24">
       <IxCol span="4">
-        <IxButton mode="primary">导入</IxButton>
+        <IxButton mode="primary" style="margin-right: 8px;">导入</IxButton>
+        <IxButton>导出</IxButton>
       </IxCol>
     </IxRow>
     <IxRow gutter="24">

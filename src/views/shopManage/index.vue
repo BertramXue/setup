@@ -201,15 +201,15 @@ const treeData = [
     key: '0',
     children: [
       {
-        label: '服饰',
+        label: '美洲地区',
         key: '0-0-0',
       },
       {
-        label: '珠宝',
+        label: '亚太地区',
         key: '0-0-1',
       },
-      { label: '美妆产品', key: '0-1-0' },
-      { label: '数码产品', key: '0-1-1' },
+      { label: '欧洲地区', key: '0-1-0' },
+      { label: '非洲地区', key: '0-1-1' },
     ],
   },
 ]
@@ -255,66 +255,123 @@ const columns: ProTableColumn<Data>[] = [
     sortable: {},
   },
   {
-    title: 'SKU',
-    dataKey: 'sku',
-    width: 100,
-    customCell: ({ value }: { value: string }) => {
-      return value || '-';
-    },
-    sortable: {}
-  },
-  {
-    title: 'ASIN',
-    dataKey: 'asin',
-    width: 100,
-    customCell: ({ value }: { value: string }) => {
-      return value || '-';
-    },
-    sortable: {},
-  },
-  {
-    title: '上架时间',
-    dataKey: 'shelfTime',
-    customCell: ({ value }: { value: string }) => {
-      return value || '-';
-    },
+    title: '店铺名',
+    dataKey: 'shopName',
     width: 150,
     sortable: {},
+    fixed: 'start',
   },
   {
-    title: 'price',
-    dataKey: 'price',
-    width: 100,
-    customCell: ({ value }: { value: string }) => {
-      return value || '-';
-    },
+    title: '网店交易额',
+    dataKey: 'onlineStoreRevenue',
+    customCell: 'onlineStoreRevenue',
+    width: 120,
     sortable: {}
   },
   {
-    title: 'C3批量',
-    dataKey: 'batch',
-    width: 100,
-    customCell: ({ value }: { value: string }) => {
-      return value || '-';
-    },
-    sortable: {}
-  },
-  {
-    title: '标签',
-    dataKey: 'tags',
-    customCell: ({ value }: { value: string }) => {
-      return value || '-';
-    },
+    title: '退款金额',
+    dataKey: 'refundAmount',
+    customCell: 'refundAmount',
     width: 150,
     sortable: {}
   },
   {
-    title: '备注',
-    dataKey: 'desc',
-    customCell: ({ value }: { value: string }) => {
-      return value || '-';
-    },
+    title: '环比增长',
+    dataKey: 'monthOnMonthGrowth',
+    customCell: 'monthOnMonthGrowth',
     width: 150,
+    sortable: {}
+  },
+  {
+    title: '平台佣金',
+    dataKey: 'platformCommission',
+    customCell: 'platformCommission',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '销售额',
+    dataKey: 'sales',
+    customCell: 'sales',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '运费',
+    dataKey: 'shippingFee',
+    customCell: 'shippingFee',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '产品成本',
+    dataKey: 'productCost',
+    customCell: 'productCost',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '广告费用',
+    dataKey: 'advertisingCost',
+    customCell: 'advertisingCost',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '头程费用',
+    dataKey: 'firstLegFee',
+    customCell: 'firstLegFee',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: 'VAT费用',
+    dataKey: 'vat',
+    customCell: 'vat',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '其他杂费',
+    dataKey: 'other',
+    customCell: 'other',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '拍摄成本',
+    dataKey: 'photo',
+    customCell: 'photo',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '毛利',
+    dataKey: 'grossProfit',
+    customCell: 'grossProfit',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '毛利率',
+    dataKey: 'grossProfitMargin',
+    customCell: 'grossProfitMargin',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '订单数',
+    dataKey: 'orderCount',
+    customCell: 'orderCount',
+    width: 150,
+    sortable: {}
+  },
+  {
+    title: '月份',
+    dataKey: 'month',
+    customCell: 'month',
+    width: 150,
+    sortable: {}
   },
   {
     title: '操作',
